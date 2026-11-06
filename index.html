@@ -1,0 +1,30 @@
+<!doctype html><html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>SIKAP SMANPRO</title>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#0b2a5b">
+<link rel="icon" href="icon-192.png"><link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="SIKAP SMANPRO"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<style>html,body{margin:0;height:100%;background:#0b2a5b;font-family:system-ui,sans-serif;color:#fff}
+#l{position:fixed;inset:0;z-index:5;background:#0b2a5b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;text-align:center;padding:20px}
+#l img{width:min(260px,70vw);border-radius:28px;box-shadow:0 10px 30px #0008}#l small{opacity:.8}#l a{color:#f5b301;display:none}
+iframe{position:fixed;left:0;right:0;bottom:0;top:env(safe-area-inset-top,0px);width:100%;height:calc(100% - env(safe-area-inset-top,0px));border:0;background:#f3f6fb}
+#ios{position:fixed;inset:0;z-index:20;background:#000a;display:none;align-items:center;justify-content:center}#ios>div{background:#fff;color:#14213d;border-radius:14px;padding:18px;width:min(320px,90vw)}#ios button{background:#0b2a5b;color:#fff;border:0;border-radius:8px;padding:9px 16px;font-weight:700}#pasang{position:fixed;left:12px;bottom:12px;z-index:10;display:none;background:#f5b301;color:#222;border:0;border-radius:99px;padding:10px 16px;font-weight:700;box-shadow:0 4px 14px #0006}</style></head><body>
+<div id="l"><img src="icon-512.png" alt="SIKAP SMANPRO"><span>Memuat aplikasi…</span><a id="o" href="https://script.google.com/macros/s/AKfycbyJBy8Wb9cv1aU11RO-1sWCiY2QgNrIvxqt0QJziV3wPKBXbKou7f2YEXYgNaMDO13W/exec">Belum tampil? Buka langsung</a></div>
+<button id="pasang">⬇ Instal</button>
+<div id="ios"><div><b>Instal di iPhone</b><p>1. Ketuk tombol <b>Bagikan</b> (kotak berpanah) di Safari.<br>2. Pilih <b>Tambah ke Layar Utama</b>.<br>3. Ketuk <b>Tambah</b>.</p><button onclick="document.getElementById('ios').style.display='none'">Mengerti</button></div></div>
+<script>
+const $=i=>document.getElementById(i);let ev=null;
+const U='https://script.google.com/macros/s/AKfycbyJBy8Wb9cv1aU11RO-1sWCiY2QgNrIvxqt0QJziV3wPKBXbKou7f2YEXYgNaMDO13W/exec';let inst=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+try{if(inst)localStorage.setItem('sikap_installed','1');else if(localStorage.getItem('sikap_installed'))inst=true}catch(e){}
+const fr=document.createElement('iframe');fr.id='f';fr.title='SIKAP SMANPRO';fr.allow='clipboard-write; fullscreen';
+fr.addEventListener('load',()=>setTimeout(()=>$('l').style.display='none',400));
+fr.src=inst?U+'?pwa=1':U;document.body.insertBefore(fr,$('pasang'));
+setTimeout(()=>{$('o').style.display='block'},12000);
+const ios=/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.MSStream;
+if(ios&&!inst)$('pasang').style.display='block';
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();ev=e;if(!inst)$('pasang').style.display='block'});
+$('pasang').onclick=async()=>{if(ev){ev.prompt();await ev.userChoice;ev=null;$('pasang').style.display='none'}else if(ios){$('ios').style.display='flex'}};
+window.addEventListener('appinstalled',()=>{try{localStorage.setItem('sikap_installed','1')}catch(e){}$('pasang').style.display='none'});
+if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script></body></html>

@@ -1,0 +1,32 @@
+CARA MEMASANG APLIKASI SIKAP SMANPRO DI LAYAR UTAMA HP (PWA)
+===============================================
+PWA ini hanya membungkus link Apps Script, jadi setiap pembaruan aplikasi (Code.gs/Index.html)
+tampil otomatis setelah Anda Terapkan > Kelola penerapan > Edit > Versi baru. Tidak perlu hosting ulang.
+
+Link Apps Script tidak bisa dipasang sebagai aplikasi dengan ikon sendiri karena Google
+tidak mengizinkan file manifest. Solusinya: folder ini di-hosting gratis (HTTPS), lalu
+link hasil hosting itulah yang dipasang di HP. Isinya hanya membuka aplikasi Anda penuh layar.
+
+A. HOSTING TERMUDAH — NETLIFY DROP (tanpa akun rumit)
+  1. Buka https://app.netlify.com/drop
+  2. Seret SELURUH isi folder ini (index.html, manifest.webmanifest, sw.js, 4 ikon) ke halaman itu.
+  3. Anda mendapat alamat seperti https://nama-acak.netlify.app  (boleh diganti namanya di Site settings).
+
+B. ATAU GITHUB PAGES
+  1. Buat repository baru (publik), unggah semua file ke root repository.
+  2. Settings > Pages > Branch: main / root > Save.
+  3. Alamat: https://USERNAME.github.io/NAMA-REPO/
+
+C. PASANG DI HP
+  Android (Chrome): buka alamat hosting > menu titik tiga > "Instal aplikasi" / "Tambahkan ke layar utama".
+  iPhone (Safari): buka alamat hosting > tombol Bagikan > "Tambah ke Layar Utama".
+  Setelah terpasang, ikon logo sekolah muncul di layar utama dan terbuka tanpa bilah alamat.
+
+PENTING
+  - Pengaturan deploy Apps Script: "Execute as: Me" dan "Who has access: Anyone".
+    (Bahasa Indonesia: "Jalankan sebagai: Saya" dan "Pihak yang memiliki akses: Siapa saja".)
+    Kalau dibatasi "Siapa saja yang memiliki Akun Google", tampilan bisa kosong di dalam aplikasi.
+  - Jika Anda deploy ulang dan alamat /exec berubah, ganti alamat pada index.html
+    (dua tempat: src iframe dan link "Buka langsung"), lalu hosting ulang.
+  - Memperbarui isi aplikasi cukup "Versi baru" di Apps Script (alamat tidak berubah).
+  - Di Android, tombol kuning "Pasang di layar utama" muncul di pojok kiri bawah bila HP mendukung.
